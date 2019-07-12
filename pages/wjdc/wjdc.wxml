@@ -1,0 +1,32 @@
+<view style='background-color: #F4F4F4;height:auto;'>
+  <view class='title'>{{quesnaireInfo.questionName}}</view>
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <!--循环问题-->
+  <view class="queVw" wx:for="{{quesnaireInfo.questionList}}" wx:for-item="question"wx:for-index="quesIndex" wx:key="{{key}}">
+    <view style="height:30rpx;"></view>
+    <!--问题序号、问题名-->
+    <view class="nameVm">{{quesIndex+1}}、{{question.questionTitle}}</view>
+    <view style="height:30rpx;"></view>
+    <!--如果是单选题-->
+    <block wx:if="{{question.questionType==1}}">
+      <radio-group name="radio{{question.questionId}}" id="{{question.questionId}}" bindchange="radiochange">
+        <view class="anVm" wx:for="{{question.optionalList}}" wx:for-item="optional" wx:for-index="optIndex" wx:key="{{key}}">
+            <radio value="{{optional.optionalId}}" name="optional{{question.id}}"><span class="raVm">{{optional.optionalAnswer}}</span></radio>
+        </view>
+      </radio-group>
+      <view style="height:100rpx;">
+        <input id="username" name="input{{question.questionId}}" id="{{question.questionId}}" class="optInput" placeholder='其它' bindblur="anwserInput"/>
+      </view>
+    </block>
+    <!--如果是问答题-->
+    <block wx:if="{{question.questionType==2}}">
+      <view style="height:320rpx;">
+        <textarea class="reInput" name="input{{question.questionId}}" id="{{question.questionId}}" placeholder="" bindblur="anwserInput"></textarea>
+      </view>
+    </block>
+  </view>
+   <view class="loginBtnView">
+          <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" formType="submit">提交</button> 
+    </view>
+    </form>
+</view>

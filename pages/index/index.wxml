@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+  <text>欢迎使用中认网问卷调查</text>
+    <view class="usermotto">
+      <!--<text class="user-motto">{{motto}}</text>-->
+      <view>  
+        <view>{{show}}</view>  
+      </view>
+    </view>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信授权登录 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <view style='height:60px;'>
+        
+        </view>
+        <button bindtap="click">扫描问卷二维码</button>
+     
+        <view bindtap="wjdc">点我进入问卷调查</view>  
+    </block>
+  </view>
+</view>
