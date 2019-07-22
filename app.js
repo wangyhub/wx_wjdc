@@ -35,7 +35,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    url: "http://127.0.0.1:8080/meeting/a/meeting/mobile/tbMobile",
+    url: "https://manyidu.cait.com/wjdc/a/mobile/tbMobile",
     openId:'',
     questionnaireId:''
   }

@@ -53,8 +53,9 @@ Page({
         //获取登录的临时凭证
         var code = res.code;
         //调用后端，获取微信的session_key, secret
+        var loginUrl = app.globalData.url;
         wx.request({
-          url: 'http://192.168.12.94:8081/wjdc/a/mobile/tbMobile/wxLogin?code=' + code,
+          url: loginUrl+'/wxLogin?code=' + code,
           data: e.detail.userInfo,
           method: 'POST',
           success: function (result) {
@@ -76,17 +77,16 @@ Page({
       success: (res) => {
         var questionCode = res.result;
         var openId = wx.getStorageSync("openId");
-        console.log("questionCode=" + questionCode + "      openId=" + openId);
+        var releUrl = app.globalData.url;
         wx.request({
-          url: 'http://192.168.12.94:8081/wjdc/a/mobile/tbMobile/releQuenaire?openId=' + openId + '&queCode=' + questionCode,
+          url: releUrl+'/releQuenaire?openId=' + openId + '&queCode=' + questionCode,
           method: 'POST',
           success: function (result) {
             var r = result.data;
             if (r.status=='200'){
               var questionnaire = result.data.data;
-              console.log("questionnaire=" + questionnaire);
               wx.setStorageSync("quesiotnnaireId", questionnaire.id);
-              wx.redirectTo({
+              wx.navigateTo({
                 url: '../wjdc/wjdc',
               })
             } else if (r.status == '1'){

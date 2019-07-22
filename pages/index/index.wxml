@@ -16,8 +16,6 @@
         
         </view>
         <button bindtap="click">扫描问卷二维码</button>
-     
-        <view bindtap="wjdc">点我进入问卷调查</view>  
     </block>
   </view>
 </view>
