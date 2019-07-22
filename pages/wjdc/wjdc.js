@@ -36,9 +36,11 @@ Page({
    */
   onLoad: function (options) {
     var openId = wx.getStorageSync("openId");
+    var quesiotnnaireId = wx.getStorageSync("quesiotnnaireId");
+    var showUrl = app.globalData.url;
     var that = this;
     wx.request({
-      url: 'http://192.168.12.94:8081/wjdc/a/mobile/tbMobile/showQuenaire?openId=' + openId,
+      url: showUrl + '/showQuenaire?openId=' + openId + '&quesiotnnaireId=' + quesiotnnaireId,
       method: 'POST',
       success: function (result) {
         var questionnaire = result.data.data;
@@ -92,20 +94,21 @@ Page({
       questionnaireId: questionnaireId,
       questionAnswer: this.data.questionAnswer
     } 
-    
+    var saveUrl = app.globalData.url;
     wx.request({
-      url: 'http://192.168.12.94:8081/wjdc/a/mobile/tbMobile/saveAnswer',
+      url: saveUrl+'/saveAnswer',
       data: reqData,
       method: 'POST',
       success: function (result) {
         if('200'==result.data.status){
+         
+          wx.redirectTo({
+            url: '../index/index',
+          })
           wx.showToast({
             title: '提交完成',
             icon: 'success',
             duration: 2000
-          })
-          wx.redirectTo({
-            url: '../index/index',
           })
         }else{
           wx.showToast({

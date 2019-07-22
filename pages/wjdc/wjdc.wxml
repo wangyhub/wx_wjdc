@@ -11,7 +11,7 @@
     <block wx:if="{{question.questionType==1}}">
       <radio-group name="radio{{question.questionId}}" id="{{question.questionId}}" bindchange="radiochange">
         <view class="anVm" wx:for="{{question.optionalList}}" wx:for-item="optional" wx:for-index="optIndex" wx:key="{{key}}">
-            <radio value="{{optional.optionalId}}" name="optional{{question.id}}"><span class="raVm">{{optional.optionalAnswer}}</span></radio>
+            <radio value="{{optional.optionalId}}" name="optional{{question.id}}"><view class="raVm"></view></radio>{{optional.optionalAnswer}}
         </view>
       </radio-group>
       <view style="height:100rpx;">
